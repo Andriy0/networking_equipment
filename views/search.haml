@@ -1,0 +1,42 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+    
+.container.center
+  
+  %h4.grey-text.text-darken-1
+    = {:ua => "Пошук", :en => "Search"}[lang]
+
+  %form{:action => "search", :method => "POST"}
+    .input-field
+      %input{:type => "text", :name => "keyword", :required => true}
+      %label{:for => "brand_name"}
+        = {:ua => "Ключове слово", :en => "Keyword"}[lang]
+    .input-field
+      %input.btn.indigo.lighten-1{:type => "submit",
+                                  :value => {:ua => "шукати", :en => "find"}[lang]}
+
+  -if @products
+    
+    %h5.indigo-text.text-lighten-1
+      = {:ua => "Результат пошуку", :en => "Search results"}[lang]
+
+    %br
+    
+    .row
+
+      - @products.each do |product| 
+
+        .col.s6.md6
+          .card.z-depth-0
+            .card-content.center
+              %h6.truncate= product['name']
+              .text-wrapper.left-align
+                %h6= {:ua => "Оцінка: ", :en => "Rating: "}[lang] + product['rating'].to_s
+                %h6= {:ua => "Ціна: ", :en => "Price: "}[lang] + product['price'].to_s
+
+            .card-action.right-align
+              %a.indigo-text.text-lighten-1{:href => "details?id=#{product['id']}"}
+                = {:ua => "докладніше", :en => "more info"}[lang]
+

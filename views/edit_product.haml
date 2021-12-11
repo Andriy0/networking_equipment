@@ -1,0 +1,110 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+    
+.container.center
+
+  - if @product
+
+    %h4.grey-text.text-darken-1
+      = {:ua => "Редагувати продукт", :en => "Edit product"}[lang]
+
+    %form{:action => "edit_product?id=#{@product['id']}", :method => "POST"}
+      .input-field
+        %input{:type => "text", :name => "product_name",
+               :value => "#{@product['name']}", :required => true}
+        %label{:for => "product_name"}
+          = {:ua => "Введіть назву продукту", :en => "Enter product name"}[lang]
+        
+      .input-field
+        %input{:type => "text", :name => "product_rating",
+               :value => "#{@product['rating']}", :required => true}
+        %label{:for => "product_rating"}
+          = {:ua => "Введіть оцінку продукту", :en => "Enter product rating"}[lang]
+        
+      .input-field
+        %input{:type => "text", :name => "product_price",
+               :value => "#{@product['price']}", :required => true}
+        %label{:for => "product_price"}
+          = {:ua => "Введіть ціну продукту ($)", :en => "Enter product price ($)"}[lang]
+
+      .input-field
+        %select{:name => "product_brand"}
+          %option{:selected => true,
+                  :value => @product['brand_id']}
+            = @product['brand']
+            
+          - @brands.each do |brand|
+            %option{:value => brand['id']}
+              = brand['name']
+              
+        %label= {:ua => "Виберіть бренд", :en => "Choose brand"}[lang]
+
+      .input-field
+        %select{:name => "product_type"}
+          %option{:selected => true,
+                  :value => @product['type_id']}
+            = @product['type']
+            
+          - @types.each do |type|
+            %option{:value => type['id']}
+              = type['name']
+              
+        %label= {:ua => "Виберіть тип", :en => "Choose type"}[lang]
+        
+      .input-field
+        %select{:name => "product_connection_type"}
+          %option{:selected => true,
+                  :value => @product['connection_type_id']}
+            = @product['connection_type']
+            
+          - @connection_types.each do |connection_type|
+            %option{:value => connection_type['id']}
+              = connection_type['name']
+              
+        %label= {:ua => "Виберіть тип з'єднання", :en => "Choose connection type"}[lang]
+        
+      .input-field
+        %input{:type => "text", :name => "product_dimensions",
+               :value => "#{@product['item_dimensions']}", :required => true}
+        %label{:for => "product_dimensions"}
+          = {:ua => "Введіть розміри продукту (дюйми)", :en => "Enter product dimensions (inches)"}[lang]
+        
+      .input-field
+        %input{:type => "text", :name => "product_data_link_protocol",
+               :value => "#{@product['data_link_protocol']}", :required => true}
+        %label{:for => "product_data_link_protocol"}
+          = {:ua => "Введіть протокол передачі даних", :en => "Enter product data link protocol"}[lang]
+        
+      .input-field
+        %input{:type => "text", :name => "product_hardware_interface",
+               :value => "#{@product['hardware_interface']}", :required => true}
+        %label{:for => "product_hardware_interface"}
+          = {:ua => "Введіть інтерфейс підключення", :en => "Enter product hardware interface"}[lang]
+        
+      .input-field
+        %input{:type => "text", :name => "product_data_transfer_rate",
+               :value => "#{@product['data_transfer_rate']}", :required => true}
+        %label{:for => "product_data_transfer_rate"}
+          = {:ua => "Введіть швидкість передачі даних (МГц)", :en => "Enter product data transfer rate (MHz)"}[lang]
+
+      .input-field
+        %input{:type => "text", :name => "product_weight",
+               :value => "#{@product['weight']}", :required => true}
+        %label{:for => "product_weight"}
+          = {:ua => "Введіть вагу (фунти)", :en => "Enter product weight (pounds)"}[lang]
+
+      .input-field
+        %input.btn.indigo.lighten-1{:type => "submit",
+                                    :value => {:ua => "Оновити дані", :en => "Update"}[lang]}
+
+  - else
+
+    %h4.red-text= {:ua => "Такого продукту не існує!", :en => "No such product!"}[lang]
+
+:javascript
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+ 

@@ -1,0 +1,25 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+    
+.container.center
+
+  - if @brand
+
+    %h4.grey-text.text-darken-1
+      = {:ua => "Редагувати бренд", :en => "Edit brand"}[lang]
+
+    %form{:action => "edit_brand?id=#{@brand['id']}", :method => "post"}
+      .input-field
+        %input{:type => "text", :name => "brand_name",
+               :value => "#{@brand['name']}", :required => true}
+        %label{:for => "brand_name"}
+          = {:ua => "Введіть назву бренду", :en => "Enter brand name"}[lang]
+
+      .input-field
+        %input.btn.indigo.lighten-1{:type => "submit", :value => {:ua => "Оновити дані", :en => "Update"}[lang]}
+
+  - else
+    %h4.red-text
+      = {:ua => "Такого бренду не існує!", :en => "No such brand!"}[lang]

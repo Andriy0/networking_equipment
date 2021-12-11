@@ -1,0 +1,92 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+    
+.container.center
+
+  - if @brands && @types && @connection_types
+
+    %h4.grey-text.text-darken-1
+      = {:ua => "Додати новий продукт", :en => "Add a new product"}[lang]
+
+    %form{:action => "add_product", :method => "POST"}
+      .input-field
+        %input{:type => "text", :name => "product_name", :required => true}
+        %label{:for => "product_name"}
+          = {:ua => "Введіть назву продукту", :en => "Enter product name"}[lang]
+
+      .input-field
+        %input{:type => "text", :name => "product_rating", :required => true}
+        %label{:for => "product_rating"}
+          = {:ua => "Введіть оцінку продукту", :en => "Enter product rating"}[lang]
+
+      .input-field
+        %input{:type => "text", :name => "product_price", :required => true}
+        %label{:for => "product_price"}
+          = {:ua => "Введіть ціну продукту ($)", :en => "Enter product price ($)"}[lang]
+
+      .input-field
+        %select{:name => "product_brand", :required => true}
+
+          - @brands.each do |brand|
+            %option{:value => brand['id']}
+              = brand['name']
+
+        %label= {:ua => "Виберіть бренд", :en => "Choose brand"}[lang]
+
+      .input-field
+        %select{:name => "product_type", :required => true}
+
+          - @types.each do |type|
+            %option{:value => type['id']}
+              = type['name']
+
+        %label= {:ua => "Виберіть тип", :en => "Choose type"}[lang]
+
+      .input-field
+        %select{:name => "product_connection_type", :required => true}
+
+          - @connection_types.each do |connection_type|
+            %option{:value => connection_type['id']}
+              = connection_type['name']
+
+        %label= {:ua => "Виберіть тип з'єднання", :en => "Choose connection type"}[lang]
+
+      .input-field
+        %input{:type => "text", :name => "product_dimensions", :required => true}
+        %label{:for => "product_dimensions"}
+          = {:ua => "Введіть розміри продукту (дюйми)", :en => "Enter product dimensions (inches)"}[lang]
+
+      .input-field
+        %input{:type => "text", :name => "product_data_link_protocol", :required => true}
+        %label{:for => "product_data_link_protocol"}
+          = {:ua => "Введіть протокол передачі даних", :en => "Enter product data link protocol"}[lang]
+
+      .input-field
+        %input{:type => "text", :name => "product_hardware_interface", :required => true}
+        %label{:for => "product_hardware_interface"}
+          = {:ua => "Введіть інтерфейс підключення", :en => "Enter product hardware interface"}[lang]
+
+      .input-field
+        %input{:type => "text", :name => "product_data_transfer_rate", :required => true}
+        %label{:for => "product_data_transfer_rate"}
+          = {:ua => "Введіть швидкість передачі даних (МГц)", :en => "Enter product data transfer rate (MHz)"}[lang]
+
+      .input-field
+        %input{:type => "text", :name => "product_weight", :required => true}
+        %label{:for => "product_weight"}
+          = {:ua => "Введіть вагу (фунти)", :en => "Enter product weight (pounds)"}[lang]
+
+      .input-field
+        %input.btn.indigo.lighten-1{:type => "submit", :value => {:ua => "Додати", :en => "Submit"}[lang]}
+
+  - else
+    %h4.red-text
+    = {:ua => "Помилка", :en => "Error"}[lang]
+
+:javascript
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+

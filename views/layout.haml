@@ -1,0 +1,72 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+  
+!!!
+
+%html{:lang => {:ua => "ua", :en => "en"}[lang]}
+  
+  %head
+
+    %link{:rel => "icon", :href => "images/logo.png"}
+    
+    %title
+      = {:ua => "Мережеве обладнання", :en => "Networking Equipment"}[lang]
+      
+    %script{:src => "https://code.jquery.com/jquery-3.6.0.min.js",
+            :integrity => "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=",
+            :crossorigin => "anonymous"}
+      
+    <!-- Compiled and minified CSS -->
+    %link{:rel => "stylesheet",
+          :href => "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"}
+  
+    <!-- Compiled and minified JavaScript -->
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"}
+      
+    %link{:rel => "stylesheet", :href => "css/style.css"}
+        
+    %body.grey.lighten-4
+      
+      %nav.white.z-depth-0
+        
+        .container
+          
+          %a.brand-logo.indigo-text.text-lighten-1{:href => "/"}
+            = {:ua => "Мережеве обладнання", :en => "Networking Equipment"}[lang]
+            
+          %ul#nav-mobile.right.hide-on-small-and-down
+            %li
+              %a.btn.indigo.lighten-1.z-depth-0{:href => "search"}
+                = {:ua => "Пошук", :en => "Search"}[lang]
+              %a.btn.indigo.lighten-1.z-depth-0{:href => "brands"}
+                = {:ua => "Бренди", :en => "Brands"}[lang]
+              %a.btn.indigo.lighten-1.z-depth-0{:href => "structure"}
+                = {:ua => "Структура", :en => "Structure"}[lang]
+              %a.btn.indigo.lighten-1.z-depth-0{:href => "add_product"}
+                = {:ua => "Додати продукт", :en => "Add product"}[lang]
+              - if session[:lang] && session[:lang] == "ua"
+                %a.btn.blue.lighten-1.z-depth-0{:href => "change_lang?rout=#{request.fullpath}"} ua
+              - else
+                %a.btn.red.lighten-1.z-depth-0{:href => "change_lang?rout=#{request.fullpath}"} en
+                
+                
+
+      = yield
+
+      %br
+      %br
+      
+      %footer.section
+        .center.grey-text.text-darken-1
+          -# = "&copy; " + {:ua => "Право власності #{Time.now.year} Мережеве Обладнання",
+          -#                :en => "Copyright #{Time.now.year} Networking Equipment"}[lang]
+          = "&copy; " + {:ua => "Право власності", :en => "Copyright"}[lang]
+        .center
+          %img{:src => "images/logo.png", :width => "40px"}
+        .center.grey-text.text-darken-1
+          = {:ua => "Мережеве Обладнання", :en => "Networking Equipment"}[lang]
+        .center.grey-text.text-darken-1
+          = "#{Time.now.year}"
+      %br

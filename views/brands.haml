@@ -1,0 +1,48 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+    
+.container.center
+  
+  %h4.grey-text.text-darken-1
+    = {:ua => "Бренди", :en => "Brands"}[lang]
+
+  %br
+  
+  %h5.indigo-text.text-lighten-1
+    = {:ua => "Додати новий бренд", :en => "Add a new brand"}[lang]
+  
+  %form{:action => "add_brand", :method => "POST"}
+    .input-field
+      %input{:type => "text", :name => "brand_name", :required => true}
+      %label{:for => "brand_name"}
+        = {:ua => "Введіть назву бренду", :en => "Enter brand name"}[lang]
+    .input-field
+      %input.btn.indigo.lighten-1{:type => "submit",
+                                  :value => {:ua => "Додати", :en => "Submit"}[lang]}
+
+  %br
+      
+  %h5.indigo-text.text-lighten-1
+    = {:ua => "Наявні бренди", :en => "Available brands"}[lang]
+  
+  %table
+    
+    %thead
+      %tr
+        %th= {:ua => "Назва", :en => "Name"}[lang]
+        %th= {:ua => "Дії", :en => "Actions"}[lang]
+        
+    %tbody
+      - @brands.each do |row|
+        %tr
+          %td= row["name"]
+          %td
+            %a.btn-small.indigo.lighten-1{
+            :href => "edit_brand?id=#{row['id']}"}
+              = {:ua => "Редагувати", :en => "Edit"}[lang]
+            %a.btn-small.indigo.lighten-1{
+            :href => "delete_brand?id=#{row['id']}"}
+              = {:ua => "Видалити", :en => "Delete"}[lang]
+              

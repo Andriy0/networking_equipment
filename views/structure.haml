@@ -1,0 +1,49 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+    
+.container.center
+  %br
+  
+  %h4.grey-text.text-darken-1
+    = {:ua => "Структура бази даних", :en => "Structure of the database"}[lang]
+  %br
+  %img{:src => "images/db_structure.png", :alt => "db_structure"}
+  %br
+  %br
+  %br
+  
+  %h4.grey-text.text-darken-1
+    = {:ua => "Приклад вмісту таблиці \"vendor\"", :en => "Example of \"vendor\" table content"}[lang]
+  %br
+  %img{:src => "images/vendor_content.png", :alt => "vendor_content"}
+  %br
+  %br
+  %br
+  
+  %h4.grey-text.text-darken-1
+    = {:ua => "Приклад вмісту таблиці \"type\"", :en => "Example of \"type\" table content"}[lang]
+  %br
+  %img{:src => "images/type_content.png", :alt => "type_content"}
+  %br
+  %br
+  %br
+  
+  %h4.grey-text.text-darken-1
+    = {:ua => "Приклад вмісту таблиці \"connection_type\"", :en => "Example of \"connection_type\" table content"}[lang]
+  %br
+  %img{:src => "images/connection_type_content.png", :alt => "connection_type_content"}
+  %br
+  %br
+  %br
+  
+  %h4.grey-text.text-darken-1
+    = {:ua => "Приклад вмісту таблиці \"adapter\"", :en => "Example of \"adapter\" table content"}[lang]
+  %br
+  %img{:src => "images/adapter_content_1.png", :alt => "adapter_content_1"}
+  %br
+  %br
+  %img{:src => "images/adapter_content_2.png", :alt => "adapter_content_2"}
+  %br
+  

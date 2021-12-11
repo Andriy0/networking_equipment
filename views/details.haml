@@ -1,0 +1,37 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+    
+.container.center
+
+  - if @product
+
+    %h5= @product['name']
+    .text-wrapper.left-align
+      %h5= {:ua => "Оцінка: ", :en => "Rating: "}[lang] + @product['rating'].to_s
+      %h5= {:ua => "Ціна ($): ", :en => "Price ($): "}[lang] + @product['price'].to_s
+      %h5= {:ua => "Бренд: ", :en => "Brand: "}[lang] + @product['brand']
+      %h5= {:ua => "Тип: ", :en => "Type: "}[lang] + @product['type'].to_s
+      %h5= {:ua => "Тип з'єднання: ", :en => "Connection type: "}[lang] + @product['connection_type']
+      %h5= {:ua => "Розміри (дюйми): ", :en => "Item dimensions (inches): "}[lang] + @product['item_dimensions']
+      %h5= {:ua => "Протокол передачі даних: ", :en => "Data link protocol: "}[lang] + @product['data_link_protocol']
+      %h5= {:ua => "Інтерфейс підключення: ", :en => "Hardware interface: "}[lang] + @product['hardware_interface']
+      %h5= {:ua => "Швидкість передачі даних (МГц): ", :en => "Data transfer rate (MHz): "}[lang] + @product['data_transfer_rate'].to_s
+      %h5= {:ua => "Вага (фунти): ", :en => "Weight (pounds): "}[lang] + @product['weight'].to_s
+    %br
+    %br
+    <!-- EDIT -->
+    %a.btn.indigo.lighten-1.z-depth-0{:href => "edit_product?id=#{@product['id']}"}
+      = {:ua => "редагувати", :en => "edit"}[lang]
+
+    <!-- DELETE -->
+    %a.btn.indigo.lighten-1.z-depth-0{:href => "delete_product?id=\"#{@product['id']}\""}
+      = {:ua => "видалити", :en => "delete"}[lang]
+
+  - else
+
+    %h4.red-text
+      = {:ua => "Такого продукту не має!", :en =>  "No such product!"}[lang]
+
+ 

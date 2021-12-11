@@ -1,0 +1,27 @@
+- if session[:lang] && session[:lang] == "ua"
+  - lang = :ua
+- else
+  - lang = :en
+    
+%h4.center.grey-text.text-darken-1
+  = {:ua => "Продукти", :en => "Products"}[lang]
+
+- if @products
+  
+  .container
+    .row
+
+      - @products.each do |product| 
+
+        .col.s6.md6
+          .card.z-depth-0
+            .card-content.center
+              %h6.truncate= product['name']
+              .text-wrapper.left-align
+                %h6= {:ua => "Оцінка: ", :en => "Rating: "}[lang] + product['rating'].to_s
+                %h6= {:ua => "Ціна: ", :en => "Price: "}[lang] + product['price'].to_s
+
+            .card-action.right-align
+              %a.indigo-text.text-lighten-1{:href => "details?id=#{product['id']}"}
+                = {:ua => "докладніше", :en => "more info"}[lang]
+
