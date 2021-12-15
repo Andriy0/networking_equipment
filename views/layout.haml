@@ -47,9 +47,9 @@
               %a.btn.indigo.lighten-1.z-depth-0{:href => "add_product"}
                 = {:ua => "Додати продукт", :en => "Add product"}[lang]
               - if session[:lang] && session[:lang] == "ua"
-                %a.btn.blue.lighten-1.z-depth-0{:href => "change_lang?rout=#{request.fullpath}"} ua
+                %a.btn.black.z-depth-0{:href => "change_lang?lang=en&rout=#{request.fullpath}"} ua
               - else
-                %a.btn.red.lighten-1.z-depth-0{:href => "change_lang?rout=#{request.fullpath}"} en
+                %a.btn.black.z-depth-0{:href => "change_lang?lang=ua&rout=#{request.fullpath}"} en
                 
                 
 
