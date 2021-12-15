@@ -28,8 +28,13 @@ class NetEq < Sinatra::Base
 
   get '/change_lang' do
 
-    if session[:lang] == "en"
-      session[:lang] = "ua"
+    # if session[:lang] == "en"
+    #   session[:lang] = "ua"
+    # else
+    #   session[:lang] = "en"
+    # end
+    if params[:lang]
+      session[:lang] = params[:lang]
     else
       session[:lang] = "en"
     end
@@ -41,7 +46,7 @@ class NetEq < Sinatra::Base
   get '/' do
 
     if !session[:lang]
-      session[:lang] = "us"
+      session[:lang] = "ua"
     end
     
     @products = client.query("
