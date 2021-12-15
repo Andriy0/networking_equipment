@@ -8,6 +8,12 @@
   %h4.grey-text.text-darken-1
     = {:ua => "Пошук", :en => "Search"}[lang]
 
+  %p.grey-text.flow-text
+    = {:ua => "Пошук здійснюється по назвах адаптерів, брендах, типах (internal, external),
+ типах підключення (wired, wireless, wired/wireless)",
+       :en => "Search is being executed on adapter names, brands, types (internal, external),
+ connection types (wired, wireless, wired/wireless)"}[lang]
+
   %form{:action => "search", :method => "POST"}
     .input-field
       %input{:type => "text", :name => "keyword", :required => true}
@@ -17,10 +23,10 @@
       %input.btn.indigo.lighten-1{:type => "submit",
                                   :value => {:ua => "шукати", :en => "find"}[lang]}
 
-  -if @products
+  - if @products and @products.count > 0
     
     %h5.indigo-text.text-lighten-1
-      = {:ua => "Результат пошуку", :en => "Search results"}[lang]
+      = {:ua => "Результати пошуку", :en => "Search results"}[lang]
 
     %br
     
@@ -28,7 +34,7 @@
 
       - @products.each do |product| 
 
-        .col.s6.md6
+        .col.m6.s12
           .card.z-depth-0
             .card-content.center
               %h6.truncate= product['name']
@@ -40,3 +46,7 @@
               %a.indigo-text.text-lighten-1{:href => "details?id=#{product['id']}"}
                 = {:ua => "докладніше", :en => "more info"}[lang]
 
+  - elsif @products and @products.count == 0
+    
+    %h5.red-text.text-lighten-1
+      = {:ua => "Результатів немає!", :en => "No results!"}[lang]
